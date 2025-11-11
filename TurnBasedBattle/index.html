@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Turn-Based Battle</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="stats-area">
+            <div id="player-stats" class="stats-panel"></div>
+        </div>
+        <div id="battle-area">
+            <div id="player" class="character">
+                <div class="icon"></div>
+                <div class="name">Player</div>
+                <div class="hp-bar-container">
+                    <div id="player-hp" class="hp-bar"></div>
+                </div>
+                <div id="player-hp-text" class="hp-text"></div>
+                <div class="rage-bar-container">
+                    <div id="player-rage" class="rage-bar"></div>
+                </div>
+                <div id="player-rage-text" class="rage-text"></div>
+            </div>
+            <div id="center-area">
+                <div id="action-menu">
+                    <button data-action="attack">Attack</button>
+                    <button data-action="defend">Defend</button>
+                    <button data-action="skill">Skill</button>
+                </div>
+                <div id="skill-menu" class="hidden">
+                    <button data-skill="heavy-strike" data-description="Deal 125% ATK damage, 70% chance to stun for 2 turns. Cost: 5 Rage. CD: 4 turns.">Heavy Strike</button>
+                    <button data-skill="reckless-attack" data-description="Consume 20% current HP. Deal 150% ATK + HP consumed damage. Cost: 8 Rage. CD: 4 turns.">Reckless Attack</button>
+                    <button data-skill="back">Back</button>
+                </div>
+                <div id="log-message" class="log-container"></div>
+                <div id="tooltip" class="hidden"></div>
+            </div>
+            <div id="enemy" class="character">
+                <div id="enemy-status-effects" class="status-effects-container"></div>
+                <div class="icon"></div>
+                <div class="name">Enemy</div>
+                <div class="hp-bar-container">
+                    <div id="enemy-hp" class="hp-bar"></div>
+                </div>
+                <div id="enemy-hp-text" class="hp-text"></div>
+            </div>
+        </div>
+        <div id="enemy-stats-area">
+            <div id="enemy-stats" class="stats-panel"></div>
+        </div>
+    <div id="game-over-screen" class="hidden">
+        <div id="game-over-message"></div>
+        <button id="restart-button" class="hidden">Restart</button>
+    </div>
+
+    <div id="level-up-screen" class="hidden">
+        <h2>Level Up!</h2>
+        <p>Choose your upgrades to continue.</p>
+        <div class="skill-choice-container">
+            <h3>Choice 1: Stat Boost</h3>
+            <div id="skill-choice-1">
+                <!-- Skill options will be populated by JS -->
+            </div>
+        </div>
+        <div class="skill-choice-container">
+            <h3>Choice 2: Passive Skill</h3>
+            <div id="skill-choice-2">
+                <!-- Skill options will be populated by JS -->
+            </div>
+        </div>
+        <button id="next-level-button" class="hidden">Next Level</button>
+    </div>
+
+    <div id="tooltip" class="hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

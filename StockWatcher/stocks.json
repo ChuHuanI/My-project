@@ -1,0 +1,43 @@
+[
+    {
+        "symbol": "2330.TW",
+        "name": "Taiwan Semiconductor Manufacturing Company Limited",
+        "target_price": 1460.0,
+        "condition": "<=",
+        "category": "半導體"
+    },
+    {
+        "symbol": "2454.TW",
+        "name": "MediaTek Inc.",
+        "target_price": 1300.0,
+        "category": "半導體"
+    },
+    {
+        "symbol": "2884.TW",
+        "name": "E.SUN Financial Holding Company, Ltd.",
+        "target_price": 30.0,
+        "condition": "<=",
+        "category": "金融"
+    },
+    {
+        "symbol": "2891.TW",
+        "name": "CTBC Financial Holding Co., Ltd.",
+        "target_price": 41.0,
+        "condition": "<=",
+        "category": "金融"
+    },
+    {
+        "symbol": "5880.TW",
+        "name": "Taiwan Cooperative Financial Holding Co., Ltd.",
+        "target_price": 20.0,
+        "condition": "<=",
+        "category": "金融"
+    },
+    {
+        "symbol": "2880.TW",
+        "name": "Hua Nan Financial Holdings Co., Ltd.",
+        "target_price": 30.0,
+        "condition": "<=",
+        "category": "金融"
+    }
+]

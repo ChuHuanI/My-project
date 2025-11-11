@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 大富翁</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <h1>Gemini 大富翁</h1>
+        <div class="game-container">
+            <div id="game-board">
+            <div id="round-counter"></div>
+        </div>
+            <div class="sidebar">
+                <div id="player-info">
+                    <h2>玩家資訊</h2>
+                    <div class="player-info-container">
+                        <div id="player1-info" class="player-info-box">
+                            <strong>玩家 1 (您)</strong>
+                            <p>資金: $<span id="player1-money">1500</span></p>
+                        </div>
+                        <div id="player2-info" class="player-info-box">
+                            <strong>玩家 2 (電腦)</strong>
+                            <p>資金: $<span id="player2-money">1500</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="controls">
+                    <h2>控制面板</h2>
+                    <div class="controls-container">
+                        <button id="roll-dice-btn">擲骰子</button>
+                        <div id="dice-container">
+                            <div class="die" id="die1">1</div>
+                            <div class="die" id="die2">1</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="decision-panel" style="display: none;">
+                    <p id="decision-text"></p>
+                    <button id="buy-btn">購買</button>
+                    <button id="build-btn" style="display: none;">蓋房子</button>
+                    <button id="pass-btn">放棄</button>
+                </div>
+                <div id="log">
+                    <h2>遊戲日誌</h2>
+                    <div id="log-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
