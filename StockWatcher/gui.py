@@ -17,17 +17,17 @@ def load_tw_stock_list(logger):
     try:
         with open('tw_stock_list.json', 'r', encoding='utf-8') as f:
             TW_STOCK_LIST = json.load(f)
-        logger(f"成功載入 {len(TW_STOCK_LIST)} 筆台股字典資料。" )
+        logger(f"成功載入 {len(TW_STOCK_LIST)} 筆股票資料。" )
     except FileNotFoundError:
         logger("錯誤：找不到 'tw_stock_list.json'。請先執行 'update_stock_list.py'。" )
     except Exception as e:
-        logger(f"載入台股字典時發生錯誤: {e}")
+        logger(f"載入股票資料時發生錯誤: {e}")
 
 class StockWatcherApp:
     def __init__(self, root):
         self.root = root
         self.root.title("股票價格監控小助理")
-        self.root.geometry("1210x600")
+        self.root.geometry("1335x600")
 
         style = ttk.Style()
         style.theme_use('clam')
@@ -59,7 +59,7 @@ class StockWatcherApp:
         self.log_text = self.create_log_text(log_frame)
         self.log_text.tag_configure("target_met", foreground="blue", font=('Microsoft JhengHei UI', 13, "bold"))
 
-        self.log("歡迎使用！正在載入台股字典...")
+        self.log("歡迎使用！正在載入股票資料...")
         load_tw_stock_list(self.log)
         self.refresh_stock_list()
         self.run_price_check_threaded()
@@ -79,13 +79,48 @@ class StockWatcherApp:
         return tree
 
     def create_buttons(self, parent):
-        parent.columnconfigure((0, 1, 2, 3, 4, 5), weight=1)
+        # Configure column weights to give more space to the 'Edit' button
+        for i in range(7):
+            if i == 2:  # Column for '編輯股票/分類'
+                parent.columnconfigure(i, weight=2)
+            else:
+                parent.columnconfigure(i, weight=1)
+
         ttk.Button(parent, text="刷新列表", command=self.refresh_stock_list).grid(row=0, column=0, sticky="ew", padx=2)
         ttk.Button(parent, text="新增股票", command=self.add_stock_window).grid(row=0, column=1, sticky="ew", padx=2)
         ttk.Button(parent, text="編輯股票/分類", command=self.edit_stock).grid(row=0, column=2, sticky="ew", padx=2)
         ttk.Button(parent, text="刪除選取", command=self.remove_selected_stock).grid(row=0, column=3, sticky="ew", padx=2)
         ttk.Button(parent, text="執行檢查", command=self.run_price_check_threaded).grid(row=0, column=4, sticky="ew", padx=2)
         ttk.Button(parent, text="清除日誌", command=self.clear_log).grid(row=0, column=5, sticky="ew", padx=2)
+        ttk.Button(parent, text="說明", command=self.show_help).grid(row=0, column=6, sticky="ew", padx=2) # Add Help button
+
+    def show_help(self):
+        help_window = tk.Toplevel(self.root)
+        help_window.title("使用說明")
+        help_window.geometry("750x480") # Increased width
+        help_window.resizable(False, False)
+
+        help_message = (
+            "股票價格監控小助理使用說明:\n\n"
+            "1. 刷新列表: 手動從 stocks.json 檔案重新載入並顯示監控清單。\n\n"
+            "2. 新增股票: 點擊「新增股票」，輸入股號(如 2330.TW)或公司名稱，\n   設定條件與目標價後新增。\n\n"
+            "3. 編輯/刪除: 在列表中選取一檔股票，點擊「編輯」或「刪除」按鈕。\n   刪除分類會一併刪除其下所有股票。\n\n"
+            "4. 排序: 選取一檔股票，點擊「上移」或「下移」來調整其在列表中的順序。\n\n"
+            "5. 執行檢查: 手動觸發一次價格檢查。程式預設會在背景定時檢查。\n\n"
+            "6. 日誌: 顯示程式的操作記錄、股價檢查結果和達標通知。\n\n"
+            "7. 資料保存: 所有監控清單的變更都會自動儲存。"
+        )
+        
+        msg_font = ('Microsoft JhengHei UI', 12)
+        msg = tk.Message(help_window, text=help_message, font=msg_font, width=730, justify=tk.LEFT) # Increased width
+        msg.pack(pady=15, padx=15, expand=True, fill=tk.BOTH)
+
+        ok_button = ttk.Button(help_window, text="確定", command=help_window.destroy, width=10)
+        ok_button.pack(pady=10)
+
+        help_window.transient(self.root)
+        help_window.grab_set()
+        self.root.wait_window(help_window)
 
     def create_log_text(self, parent):
         log_font = ('Microsoft JhengHei UI', 13) # 字體放大

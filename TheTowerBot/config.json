@@ -1,0 +1,7 @@
+{
+    "window_title": "MSI App Player",
+    "delay": "720",
+    "prevent_sleep": false,
+    "auto_stop": true,
+    "max_fails": "3"
+}
